@@ -1,8 +1,8 @@
 (function($, when, slice) {
 
-  function crank(attr) {
+  function crank(attr, eventType) {
     var self = this;
-    var args = slice.call(arguments, 1);
+    var args = slice.call(arguments, 2);
 
     return when.apply(null, this.map(function(index, element) {
       var $element = $(element);
@@ -11,7 +11,7 @@
         .attr(attr)
         .split(/\s+/)
         .map(function(module) {
-          return when($element.triggerHandler(attr + "." + module, args)).then(function(result) {
+          return when($element.triggerHandler(eventType + "." + module, args)).then(function(result) {
             return arguments.length > 1 ? slice.call(arguments) : result || module;
           });
         }));
