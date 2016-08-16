@@ -11,7 +11,9 @@
         .attr(attr)
         .split(/\s+/)
         .map(function(module) {
-          return $element.triggerHandler([attr, module].join("."), args) || [$element, module];
+          return when($element.triggerHandler(attr + "." + module, args)).then(function(result) {
+            return arguments.length > 1 ? slice.call(arguments) : result || module;
+          });
         }));
     }));
   }
