@@ -1,4 +1,14 @@
-(function($, when, slice) {
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["jquery"], factory);
+  } else if (typeof module === "object" && module.exports) {
+    module.exports = factory(require("jquery"));
+  } else {
+    root["mu-jquery-wire/jquery.crank"], factory(root.jQuery);
+  }
+}(this, function($) {
+  var slice = Array.prototype.slice;
+  var when = $.when;
 
   function crank(attr, eventType) {
     var self = this;
@@ -35,4 +45,4 @@
       }
     }).promise();
   };
-})(jQuery, jQuery.when, Array.prototype.slice);
+}));
