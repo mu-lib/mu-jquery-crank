@@ -27,7 +27,7 @@
     }));
   }
 
-  return $.fn.crank = function() {
+  return function() {
     var self = this;
     var args = arguments;
 
