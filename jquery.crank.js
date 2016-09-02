@@ -1,30 +1,31 @@
-(function(root, factory) {
+(function(modules, root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["jquery"], factory);
+    define(modules, factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory(require("jquery"));
+    module.exports = factory.apply(root, modules.map(function(m) {
+      return require(m);
+    }));
   } else {
-    root["mu-jquery-crank/jquery.crank"] = factory(root.jQuery);
+    root["mu-jquery-crank/jquery.crank"] = factory.apply(root, modules.map(function(m) {
+      return {
+          "jquery": root.jQuery
+        }[m] || root[m];
+    }));
   }
-}(this, function($) {
+})([
+  "jquery",
+  "mu-jquery-wire/jquery.wire"
+], this, function($, wire) {
   var slice = Array.prototype.slice;
 
   function crank(attr, eventType) {
-    var self = this;
     var args = slice.call(arguments, 2);
 
-    return $.when.apply(null, this.map(function(index, element) {
-      var $element = $(element);
-
-      return $.when.apply(null, $element
-        .attr(attr)
-        .split(/\s+/)
-        .map(function(module) {
-          return $.when($element.triggerHandler(eventType + "." + module, args)).then(function(result) {
-            return arguments.length > 1 ? slice.call(arguments) : result || module;
-          });
-        }));
-    }));
+    return wire.call(this, attr, function(ns) {
+      return $.when($(this).triggerHandler(eventType + "." + ns, args)).then(function(result) {
+        return arguments.length > 1 ? slice.call(arguments) : result || ns;
+      });
+    });
   }
 
   return function() {
@@ -44,4 +45,4 @@
       }
     }).promise();
   };
-}));
+});
