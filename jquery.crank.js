@@ -4,7 +4,7 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory(require("jquery"));
   } else {
-    root["mu-jquery-crank/jquery.crank"], factory(root.jQuery);
+    root["mu-jquery-crank/jquery.crank"] = factory(root.jQuery);
   }
 }(this, function($) {
   var slice = Array.prototype.slice;
