@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v1.1.1...v2.0.0) (2016-09-02)
+
+
+### Bug Fixes
+
+* correct global name ([4e109aa](https://github.com/mu-lib/mu-jquery-crank/commit/4e109aa))
+
+
+### Features
+
+* don't set $.fn.crank ([d340dde](https://github.com/mu-lib/mu-jquery-crank/commit/d340dde))
+
+
+### BREAKING CHANGES
+
+* From this version it's prefferred that users call crank
+via `crank.call($element, eventType, args..)`. Users who want the old behaviour
+can use `$.fn.crank = require("mu-jquery-crank/jquery.crank");` or
+equivalent.
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/mu-lib/mu-jquery-crank/compare/v1.1.0...v1.1.1) (2016-09-01)
 
