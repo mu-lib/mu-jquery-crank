@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/mu-lib/mu-jquery-crank/compare/v2.0.0...v2.0.1) (2016-09-02)
+
+
+### Bug Fixes
+
+* fix typo in global assignment ([8c9f098](https://github.com/mu-lib/mu-jquery-crank/commit/8c9f098))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v1.1.1...v2.0.0) (2016-09-02)
 
