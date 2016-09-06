@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/mu-lib/mu-jquery-crank/compare/v2.1.0...v2.1.1) (2016-09-06)
+
+
+### Bug Fixes
+
+* bump mu-jquery-wire to 4.0.1 ([81cf772](https://github.com/mu-lib/mu-jquery-crank/commit/81cf772))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/mu-lib/mu-jquery-crank/compare/v2.0.2...v2.1.0) (2016-09-06)
 
