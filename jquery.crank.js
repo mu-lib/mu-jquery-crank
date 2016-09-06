@@ -17,15 +17,21 @@
   "mu-jquery-wire/jquery.wire"
 ], this, function($, wire) {
   var slice = Array.prototype.slice;
+  var re = /\s+/;
 
   function crank(attr, eventType) {
     var args = slice.call(arguments, 2);
 
-    return wire.call(this, attr, function(ns) {
-      return $.when($(this).triggerHandler(eventType + "." + ns, args)).then(function(result) {
-        return arguments.length > 1 ? slice.call(arguments) : result || ns;
-      });
-    });
+    return wire.call(this,
+      function(name) {
+        return ($(this).attr(name) || "").split(re);
+      },
+      function(ns) {
+        return $.when($(this).triggerHandler(eventType + "." + ns, args)).then(function(result) {
+          return arguments.length > 1 ? slice.call(arguments) : result || ns;
+        });
+      },
+      attr);
   }
 
   return function() {
