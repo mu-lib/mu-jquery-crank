@@ -18,7 +18,6 @@
 ], this, function(QUnit, $, crank) {
   var root = this;
   var setTimeout = root.setTimeout;
-  var slice = Array.prototype.slice;
 
   QUnit.module("mu-jquery-crank/jquery.crank");
   
@@ -29,8 +28,8 @@
 
     return crank.call($elements, function () {
       assert.notOk(true, "should never be called");
-    }, "test").then(function () {
-      assert.deepEqual(slice.call(arguments), []);
+    }, "test").then(function (result) {
+      assert.deepEqual(result, undefined);
     });
   });
 
@@ -80,8 +79,8 @@
 
     return crank.call($elements, function () {
       return ["one","two"];
-    }, "test").done(function() {
-      assert.deepEqual(slice.call(arguments), [1,2]);
+    }, "test").done(function(result) {
+      assert.deepEqual(result, [[1,2]]);
     });
   });
 
@@ -99,8 +98,8 @@
 
     return crank.call($elements, function () {
       return ["one","two"];
-    }, "test").done(function() {
-      assert.deepEqual(slice.call(arguments), [[1,2],[3,4]]);
+    }, "test").done(function(result) {
+      assert.deepEqual(result, [[1,2],[3,4]]);
     });
   });
 
@@ -125,8 +124,8 @@
 
     return crank.call($elements, function () {
       return ["undefined","boolean","object","string","number"];
-    }, "test").then(function () {
-      assert.deepEqual(slice.call(arguments), [ "undefined","boolean","object","string","number" ]);
+    }, "test").then(function (result) {
+      assert.deepEqual(result, [["undefined","boolean","object","string","number" ]]);
     });
   });
 
@@ -154,8 +153,8 @@
 
     return crank.call($elements, function () {
       return ["string","boolean","number","object","array"];
-    }, "test").then(function () {
-      assert.deepEqual(slice.call(arguments), [ "string",true,1,o,a ]);
+    }, "test").then(function (result) {
+      assert.deepEqual(result, [["string",true,1,o,a ]]);
     });
   });
 
@@ -178,8 +177,8 @@
 
     return crank.call($elements, function () {
       return ["undefined","string"];
-    }, "test").done(function() {
-      assert.deepEqual(slice.call(arguments), [ "undefined","woot" ]);
+    }, "test").done(function(result) {
+      assert.deepEqual(result, [["undefined","woot"]]);
     });
   });
 });
