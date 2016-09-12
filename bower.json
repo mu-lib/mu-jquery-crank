@@ -10,13 +10,11 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "jquery": "^3.1.0",
-    "mu-jquery-wire": "^4.0.2"
+    "mu-jquery-wire": "^5.0.0"
   },
   "devDependencies": {
     "qunit": "^2.0.1"
