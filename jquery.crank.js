@@ -16,31 +16,13 @@
 ], this, function($, wire) {
   var slice = Array.prototype.slice;
 
-  function crank(input, eventType) {
+  return function(input, eventType) {
     var args = slice.call(arguments, 2);
 
-    return wire.call(this, input, function(element, index, ns) {
-      return $.when($(element).triggerHandler(eventType + "." + ns, args)).then(function(result) {
+    return wire.call(this, input, function($element, index, ns) {
+      return $.when($element.triggerHandler(eventType + "." + ns, args)).then(function(result) {
         return arguments.length > 1 ? slice.call(arguments) : result || ns;
       });
     });
   }
-
-  return function() {
-    var self = this;
-    var args = arguments;
-
-    return $.Deferred(function(deferred) {
-      try {
-        $.when(crank.apply(self, args)).then(
-          function() {
-            deferred.resolveWith(self, arguments);
-          }, function() {
-            deferred.rejectWith(self, arguments);
-          });
-      } catch (e) {
-        deferred.rejectWith(self, [e]);
-      }
-    }).promise();
-  };
 });
