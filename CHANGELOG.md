@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v2.1.2...v3.0.0) (2016-09-12)
+
+
+### Features
+
+* change crank signature ([6e9e950](https://github.com/mu-lib/mu-jquery-crank/commit/6e9e950))
+* Qunit ([#2](https://github.com/mu-lib/mu-jquery-crank/issues/2)) ([7081772](https://github.com/mu-lib/mu-jquery-crank/commit/7081772))
+
+
+### BREAKING CHANGES
+
+* The new crank takes a function that should return an array of ns or a promise of it.
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/mu-lib/mu-jquery-crank/compare/v2.1.1...v2.1.2) (2016-09-08)
 
