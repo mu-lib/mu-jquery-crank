@@ -1,7 +1,7 @@
 {
   "name": "mu-jquery-crank",
   "version": "3.0.0",
-  "description": "",
+  "description": "A jQuery plugin for cranking events",
   "main": "jquery.crank.js",
   "scripts": {
     "release": "standard-version"
@@ -16,7 +16,12 @@
     "url": "https://github.com/mu-lib/mu-jquery-crank/issues"
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-crank#readme",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "mu-jquery-wire": "^5.0.1"
+  },
   "devDependencies": {
+    "qunit": "^2.0.1",
     "standard-version": "^2.4.0"
   }
 }
