@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.2"></a>
+## [3.0.2](https://github.com/mu-lib/mu-jquery-crank/compare/v3.0.1...v3.0.2) (2016-10-12)
+
+
+### Bug Fixes
+
+* **packaging:** Updated package.json and bumped deps ([8e5b6fd](https://github.com/mu-lib/mu-jquery-crank/commit/8e5b6fd))
+* **tests:** test cleanup ([8a13f01](https://github.com/mu-lib/mu-jquery-crank/commit/8a13f01))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/mu-lib/mu-jquery-crank/compare/v3.0.0...v3.0.1) (2016-09-14)
 
