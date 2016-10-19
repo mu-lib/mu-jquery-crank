@@ -15,7 +15,7 @@
     var args = slice.call(arguments, 2);
 
     return wire.call(this, input, function ($element, index, ns) {
-      return $.when($element.triggerHandler(eventType + "." + ns, args)).then(function (result) {
+      return $element.constructor.when($element.triggerHandler(eventType + "." + ns, args)).then(function (result) {
         return arguments.length > 1 ? slice.call(arguments) : result || ns;
       });
     });
