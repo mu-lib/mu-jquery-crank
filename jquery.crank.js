@@ -5,15 +5,10 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-crank/jquery.crank"] = factory.apply(root, modules.map(function (m) {
-      return this[m] || root[m];
-    }, {
-        "jquery": root.jQuery
-      }));
+      return root[m];
+    }));
   }
-})([
-  "jquery",
-  "mu-jquery-wire/jquery.wire"
-], this, function ($, wire) {
+})(["mu-jquery-wire/jquery.wire"], this, function (wire) {
   var slice = Array.prototype.slice;
 
   return function (input, eventType) {
