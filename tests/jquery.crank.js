@@ -33,6 +33,40 @@
     });
   });
 
+  QUnit.test("handlers default arguments", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", function ($event) {
+        assert.equal(arguments.length, 1, "arguments.length is 1");
+        assert.ok($event instanceof $.Event, "$event is instance of $.Event");
+      });
+
+    assert.expect(2);
+
+    return crank.call($elements, function () {
+      return ["ns"];
+    }, "test");
+  });
+
+  QUnit.test("handlers extra arguments", function (assert) {
+    var o = {};
+    var a = [];
+    var $elements = $("<div>")
+      .on("test.ns", function ($event, string, boolean, number, object, array) {
+        assert.equal(arguments.length, 6, "arguments.length is 7");
+        assert.strictEqual(string, "", "string equals ''");
+        assert.strictEqual(boolean, true, "boolean equals true");
+        assert.strictEqual(number, 1, "number equals 1");
+        assert.strictEqual(object, o, "object equals o");
+        assert.strictEqual(array, a, "array equals a");
+      });
+
+    assert.expect(6);
+
+    return crank.call($elements, function () {
+      return ["ns"];
+    }, "test", "", true, 1, o, a);
+  });
+
   QUnit.test("handlers are called on one element", function (assert) {
     var $elements = $("<div>")
       .on("test.one", function () {
@@ -179,6 +213,24 @@
       return ["undefined", "string"];
     }, "test").done(function (result) {
       assert.deepEqual(result, [["undefined", "woot"]]);
+    });
+  });
+
+  QUnit.test("only last result is returned", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", function ($event, cb) {
+        return "first";
+      })
+      .on("test.ns", function ($event, cb) {
+        return "last";
+      });
+
+    assert.expect(1);
+
+    return crank.call($elements, function () {
+      return ["ns"];
+    }, "test").then(function (result) {
+      assert.deepEqual(result, [["last"]]);
     });
   });
 });
