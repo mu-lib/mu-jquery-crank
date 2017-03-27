@@ -42,9 +42,7 @@
 
     assert.expect(2);
 
-    return crank.call($elements, function () {
-      return ["ns"];
-    }, "test");
+    return crank.call($elements, "ns", "test");
   });
 
   QUnit.test("handlers extra arguments", function (assert) {
@@ -62,9 +60,7 @@
 
     assert.expect(6);
 
-    return crank.call($elements, function () {
-      return ["ns"];
-    }, "test", "", true, 1, o, a);
+    return crank.call($elements, "ns", "test", "", true, 1, o, a);
   });
 
   QUnit.test("handlers are called on one element", function (assert) {
@@ -78,9 +74,7 @@
 
     assert.expect(2);
 
-    return crank.call($elements, function () {
-      return ["one", "two"];
-    }, "test");
+    return crank.call($elements, ["one", "two"], "test");
   });
 
   QUnit.test("handlers are called on many elements", function (assert) {
@@ -94,9 +88,7 @@
 
     assert.expect(4);
 
-    return crank.call($elements, function () {
-      return ["one", "two"];
-    }, "test");
+    return crank.call($elements, ["one", "two"], "test");
   });
 
   QUnit.test("handler result from one element is collected", function (assert) {
@@ -111,9 +103,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["one", "two"];
-    }, "test").done(function (result) {
+    return crank.call($elements, ["one", "two"], "test").done(function (result) {
       assert.deepEqual(result, [[1, 2]]);
     });
   });
@@ -130,9 +120,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["one", "two"];
-    }, "test").done(function (result) {
+    return crank.call($elements, ["one", "two"], "test").done(function (result) {
       assert.deepEqual(result, [[1, 2], [3, 4]]);
     });
   });
@@ -156,9 +144,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["undefined", "boolean", "object", "string", "number"];
-    }, "test").then(function (result) {
+    return crank.call($elements, ["undefined", "boolean", "object", "string", "number"], "test").then(function (result) {
       assert.deepEqual(result, [["undefined", "boolean", "object", "string", "number"]]);
     });
   });
@@ -185,9 +171,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["string", "boolean", "number", "object", "array"];
-    }, "test").then(function (result) {
+    return crank.call($elements, ["string", "boolean", "number", "object", "array"], "test").then(function (result) {
       assert.deepEqual(result, [["string", true, 1, o, a]]);
     });
   });
@@ -209,9 +193,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["undefined", "string"];
-    }, "test").done(function (result) {
+    return crank.call($elements, ["undefined", "string"], "test").done(function (result) {
       assert.deepEqual(result, [["undefined", "woot"]]);
     });
   });
@@ -227,9 +209,7 @@
 
     assert.expect(1);
 
-    return crank.call($elements, function () {
-      return ["ns"];
-    }, "test").then(function (result) {
+    return crank.call($elements, "ns", "test").then(function (result) {
       assert.deepEqual(result, [["last"]]);
     });
   });
