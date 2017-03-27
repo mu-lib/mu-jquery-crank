@@ -51,7 +51,7 @@
     var $elements = $("<div>")
       .on("test.ns", function ($event, string, boolean, number, object, array) {
         assert.equal(arguments.length, 6, "arguments.length is 7");
-        assert.strictEqual(string, "", "string equals ''");
+        assert.strictEqual(string, "s", "string equals 's'");
         assert.strictEqual(boolean, true, "boolean equals true");
         assert.strictEqual(number, 1, "number equals 1");
         assert.strictEqual(object, o, "object equals o");
@@ -60,7 +60,7 @@
 
     assert.expect(6);
 
-    return crank.call($elements, "ns", "test", "", true, 1, o, a);
+    return crank.call($elements, "ns", "test", "s", true, 1, o, a);
   });
 
   QUnit.test("handlers are called on one element", function (assert) {
@@ -125,6 +125,22 @@
     });
   });
 
+  QUnit.test("only last handler result is collected", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", function ($event) {
+        return "first";
+      })
+      .on("test.ns", function ($event) {
+        return "last";
+      });
+
+    assert.expect(1);
+
+    return crank.call($elements, "ns", "test").then(function (result) {
+      assert.deepEqual(result, [["last"]]);
+    });
+  });
+
   QUnit.test("non-truthy handler return defaults to input", function (assert) {
     var $elements = $("<div>")
       .on("test.undefined", function () {
@@ -154,7 +170,7 @@
     var a = [];
     var $elements = $("<div>")
       .on("test.string", function () {
-        return "string";
+        return "s";
       })
       .on("test.boolean", function () {
         return true;
@@ -172,7 +188,7 @@
     assert.expect(1);
 
     return crank.call($elements, ["string", "boolean", "number", "object", "array"], "test").then(function (result) {
-      assert.deepEqual(result, [["string", true, 1, o, a]]);
+      assert.deepEqual(result, [["s", true, 1, o, a]]);
     });
   });
 
@@ -186,7 +202,7 @@
       .on("test.string", function () {
         return $.Deferred(function (deferred) {
           setTimeout(function () {
-            deferred.resolve("woot");
+            deferred.resolve("s");
           }, 0);
         }).promise();
       });
@@ -194,23 +210,7 @@
     assert.expect(1);
 
     return crank.call($elements, ["undefined", "string"], "test").done(function (result) {
-      assert.deepEqual(result, [["undefined", "woot"]]);
-    });
-  });
-
-  QUnit.test("only last result is returned", function (assert) {
-    var $elements = $("<div>")
-      .on("test.ns", function ($event, cb) {
-        return "first";
-      })
-      .on("test.ns", function ($event, cb) {
-        return "last";
-      });
-
-    assert.expect(1);
-
-    return crank.call($elements, "ns", "test").then(function (result) {
-      assert.deepEqual(result, [["last"]]);
+      assert.deepEqual(result, [["undefined", "s"]]);
     });
   });
 });
