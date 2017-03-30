@@ -14,8 +14,9 @@
 })([
   "qunit",
   "jquery",
-  "../jquery.crank",
-], this, function (QUnit, $, crank) {
+  "../collect",
+  "../jquery.crank"
+], this, function (QUnit, $, collect, crank) {
   var root = this;
   var setTimeout = root.setTimeout;
 
@@ -33,7 +34,7 @@
     });
   });
 
-  QUnit.test("handlers default arguments", function (assert) {
+  QUnit.test("handler default arguments", function (assert) {
     var $elements = $("<div>")
       .on("test.ns", function ($event) {
         assert.equal(arguments.length, 1, "arguments.length is 1");
@@ -45,7 +46,7 @@
     return crank.call($elements, "ns", "test");
   });
 
-  QUnit.test("handlers extra arguments", function (assert) {
+  QUnit.test("handler extra arguments", function (assert) {
     var o = {};
     var a = [];
     var $elements = $("<div>")
@@ -91,7 +92,7 @@
     return crank.call($elements, ["one", "two"], "test");
   });
 
-  QUnit.test("handler result from one element is collected", function (assert) {
+  QUnit.test("handler result from one element", function (assert) {
     var count = 0;
     var $elements = $("<div></div>")
       .on("test.one", function () {
@@ -108,7 +109,7 @@
     });
   });
 
-  QUnit.test("handler results from many elements are collected", function (assert) {
+  QUnit.test("handler result from many elements", function (assert) {
     var count = 0;
     var $elements = $("<div></div><div></div>")
       .on("test.one", function () {
@@ -125,64 +126,67 @@
     });
   });
 
-  QUnit.test("only last handler result is collected", function (assert) {
+  QUnit.test("array handler result unwrapped", function (assert) {
     var $elements = $("<div>")
-      .on("test.ns", function ($event) {
-        return "first";
+      .on("test.string", function ($event) {
+        return "s";
       })
-      .on("test.ns", function ($event) {
-        return "last";
+      .on("test.array", function ($event) {
+        return ["a"];
       });
 
     assert.expect(1);
 
-    return crank.call($elements, "ns", "test").then(function (result) {
-      assert.deepEqual(result, [["last"]]);
+    return crank.call($elements, ["string", "array"], "test").then(function (result) {
+      assert.deepEqual(result, [["s", "a"]]);
     });
   });
 
-  QUnit.test("non-truthy handler return defaults to input", function (assert) {
+  QUnit.test("falsy handler result returns input", function (assert) {
     var $elements = $("<div>")
       .on("test.undefined", function () {
       })
       .on("test.boolean", function () {
         return false;
       })
-      .on("test.object", function () {
-        return null;
+      .on("test.number", function () {
+        return 0;
       })
       .on("test.string", function () {
         return "";
       })
-      .on("test.number", function () {
-        return 0;
-      });
+      .on("test.object", function () {
+        return null;
+      })
+      .on("test.array", function () {
+        return [];
+      })
 
     assert.expect(1);
 
-    return crank.call($elements, ["undefined", "boolean", "object", "string", "number"], "test").then(function (result) {
-      assert.deepEqual(result, [["undefined", "boolean", "object", "string", "number"]]);
+    return crank.call($elements, ["undefined", "boolean", "number", "string", "object", "array"], "test").then(function (result) {
+      assert.deepEqual(result, [["undefined", "boolean", "number", "string", "object", "array"]]);
     });
   });
 
-  QUnit.test("truthy handler return is propagated", function (assert) {
+  QUnit.test("truthy handler result", function (assert) {
     var o = {};
     var a = [];
     var $elements = $("<div>")
-      .on("test.string", function () {
-        return "s";
-      })
       .on("test.boolean", function () {
         return true;
       })
       .on("test.number", function () {
         return 1;
       })
+      .on("test.string", function () {
+        return "s";
+      })
       .on("test.object", function () {
         return o;
       })
       .on("test.array", function () {
-        return a;
+        return [a];
       });
 
     assert.expect(1);
@@ -192,7 +196,7 @@
     });
   });
 
-  QUnit.test("async handler return is propagated", function (assert) {
+  QUnit.test("async handler result", function (assert) {
     var $elements = $("<div>")
       .on("test.undefined", function () {
         return $.Deferred(function (deferred) {
@@ -211,6 +215,62 @@
 
     return crank.call($elements, ["undefined", "string"], "test").done(function (result) {
       assert.deepEqual(result, [["undefined", "s"]]);
+    });
+  });
+
+  QUnit.test("last handler result only", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", function ($event) {
+        return "first";
+      })
+      .on("test.ns", function ($event) {
+        return "last";
+      });
+
+    assert.expect(1);
+
+    return crank.call($elements, "ns", "test").then(function (result) {
+      assert.deepEqual(result, [["last"]]);
+    });
+  });
+
+  QUnit.test("collect sync handler result", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", collect(function () {
+        return "first";
+      }))
+      .on("test.ns", collect(function () {
+        return "last";
+      }));
+
+    assert.expect(1);
+
+    return crank.call($elements, "ns", "test").done(function (result) {
+      assert.deepEqual(result, [[["first", "last"]]]);
+    });
+  });
+
+  QUnit.test("collect async handler result", function (assert) {
+    var $elements = $("<div>")
+      .on("test.ns", collect(function () {
+        return $.Deferred(function (deferred) {
+          setTimeout(function () {
+            deferred.resolve("first");
+          }, 0);
+        }).promise();
+      }))
+      .on("test.ns", collect(function () {
+        return $.Deferred(function (deferred) {
+          setTimeout(function () {
+            deferred.resolve("last");
+          }, 0);
+        }).promise();
+      }));
+
+    assert.expect(1);
+
+    return crank.call($elements, "ns", "test").done(function (result) {
+      assert.deepEqual(result, [[["first", "last"]]]);
     });
   });
 });
