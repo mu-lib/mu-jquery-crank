@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v3.0.3...v4.0.0) (2017-03-30)
+
+
+### Bug Fixes
+
+* added tests for handler arguments ([0e295eb](https://github.com/mu-lib/mu-jquery-crank/commit/0e295eb))
+
+
+### Features
+
+* added support for collecting handler result ([ad05be1](https://github.com/mu-lib/mu-jquery-crank/commit/ad05be1))
+
+
+### BREAKING CHANGES
+
+* `jquery.crank` now accounts for usage of `collect` for async handler and unwraps arrays before running them through `jQuery.when`. If your handler returns an arrat you need to wrapp that in an outer array for it to work.
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://github.com/mu-lib/mu-jquery-crank/compare/v3.0.2...v3.0.3) (2016-10-19)
 
