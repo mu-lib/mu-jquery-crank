@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/mu-lib/mu-jquery-crank/compare/v4.0.0...v4.0.1) (2017-04-05)
+
+
+### Bug Fixes
+
+* upgraded deps ([83e7ed7](https://github.com/mu-lib/mu-jquery-crank/commit/83e7ed7))
+* upgraded dev dependencies ([29923f7](https://github.com/mu-lib/mu-jquery-crank/commit/29923f7))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v3.0.3...v4.0.0) (2017-03-30)
 
