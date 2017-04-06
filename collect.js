@@ -9,9 +9,9 @@
     }));
   }
 })([], this, function () {
-  return function chain(fn) {
+  return function (fn) {
     return function ($event) {
-      return ($event.result || []).concat(fn.apply(this, arguments));
+      return ($event.result || Array.prototype).concat(fn.apply(this, arguments));
     }
   }
 });
