@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/mu-lib/mu-jquery-crank/compare/v4.0.2...v5.0.0) (2017-04-07)
+
+
+### Bug Fixes
+
+* deprecate collect for mu-jquery-capture/capture ([874c5b5](https://github.com/mu-lib/mu-jquery-crank/commit/874c5b5))
+
+
+### BREAKING CHANGES
+
+* We've relocated the capture core into a separate package called `mu-jquery-capture/capture`. Signature has also changed so devs be ware.
+
+
+
 <a name="4.0.2"></a>
 ## [4.0.2](https://github.com/mu-lib/mu-jquery-crank/compare/v4.0.1...v4.0.2) (2017-04-06)
 
