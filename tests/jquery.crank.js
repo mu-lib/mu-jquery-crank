@@ -14,9 +14,9 @@
 })([
   "qunit",
   "jquery",
-  "../collect",
+  "mu-jquery-capture/capture",
   "../jquery.crank"
-], this, function (QUnit, $, collect, crank) {
+], this, function (QUnit, $, capture, crank) {
   var root = this;
   var setTimeout = root.setTimeout;
 
@@ -234,12 +234,12 @@
     });
   });
 
-  QUnit.test("collect sync handler result", function (assert) {
+  QUnit.test("capture sync handler result", function (assert) {
     var $elements = $("<div>")
-      .on("test.ns", collect(function () {
+      .on("test.ns", capture.call($, function () {
         return "first";
       }))
-      .on("test.ns", collect(function () {
+      .on("test.ns", capture.call($, function () {
         return "last";
       }));
 
@@ -250,16 +250,16 @@
     });
   });
 
-  QUnit.test("collect async handler result", function (assert) {
+  QUnit.test("capture async handler result", function (assert) {
     var $elements = $("<div>")
-      .on("test.ns", collect(function () {
+      .on("test.ns", capture.call($, function () {
         return $.Deferred(function (deferred) {
           setTimeout(function () {
             deferred.resolve("first");
           }, 0);
         }).promise();
       }))
-      .on("test.ns", collect(function () {
+      .on("test.ns", capture.call($, function () {
         return $.Deferred(function (deferred) {
           setTimeout(function () {
             deferred.resolve("last");

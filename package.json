@@ -20,11 +20,13 @@
     "mu-jquery-wire": "^5.0.6"
   },
   "peerDependencies": {
-    "jquery": "^3.0.0"
+    "jquery": "^3.0.0",
+    "mu-jquery-capture": "^0.0.1"
   },
   "devDependencies": {
     "qunitjs": "^2.3.0",
     "jquery": "^3.2.1",
+    "mu-jquery-capture": "^0.0.1",
     "standard-version": "^4.0.0"
   }
 }
