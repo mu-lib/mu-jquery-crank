@@ -21,12 +21,12 @@
   },
   "peerDependencies": {
     "jquery": "^3.0.0",
-    "mu-jquery-capture": "^1.0.0"
+    "mu-jquery-capture": "^2.0.0"
   },
   "devDependencies": {
     "qunitjs": "^2.3.0",
     "jquery": "^3.2.1",
-    "mu-jquery-capture": "^1.0.0",
+    "mu-jquery-capture": "^2.0.0",
     "standard-version": "^4.0.0"
   }
 }
