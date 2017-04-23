@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-crank#readme",
   "dependencies": {
-    "mu-jquery-wire": "^5.0.6"
+    "mu-jquery-wire": "^5.0.8"
   },
   "peerDependencies": {
     "jquery": "^3.0.0",
