@@ -236,10 +236,10 @@
 
   QUnit.test("capture sync handler result", function (assert) {
     var $elements = $("<div>")
-      .on("test.ns", capture.call($, function () {
+      .on("test.ns", capture($, function () {
         return "first";
       }))
-      .on("test.ns", capture.call($, function () {
+      .on("test.ns", capture($, function () {
         return "last";
       }));
 
@@ -252,14 +252,14 @@
 
   QUnit.test("capture async handler result", function (assert) {
     var $elements = $("<div>")
-      .on("test.ns", capture.call($, function () {
+      .on("test.ns", capture($, function () {
         return $.Deferred(function (deferred) {
           setTimeout(function () {
             deferred.resolve("first");
           }, 0);
         }).promise();
       }))
-      .on("test.ns", capture.call($, function () {
+      .on("test.ns", capture($, function () {
         return $.Deferred(function (deferred) {
           setTimeout(function () {
             deferred.resolve("last");
