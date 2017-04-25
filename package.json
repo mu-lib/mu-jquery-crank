@@ -1,6 +1,6 @@
 {
   "name": "mu-jquery-crank",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "A jQuery plugin for cranking events",
   "main": "jquery.crank.js",
   "scripts": {
