@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "jquery": "^3.0.0",
-    "mu-jquery-capture": "^3.0.0"
+    "mu-jquery-capture": "^3.0.1"
   },
   "devDependencies": {
     "qunitjs": "^2.3.2",

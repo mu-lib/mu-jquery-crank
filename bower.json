@@ -13,7 +13,7 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": "^3.0.0",
+    "jquery": "^3.0.1",
     "mu-jquery-wire": "^5.0.8"
   },
   "devDependencies": {
