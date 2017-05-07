@@ -30,7 +30,18 @@
     return crank.call($elements, function () {
       assert.notOk(true, "should never be called");
     }, "test").then(function (result) {
-      assert.deepEqual(result, undefined);
+      assert.deepEqual(result, []);
+    });
+  });
+
+  QUnit.test("noop", function (assert) {
+    var $elements = $("<div></div><div></div>");
+
+    assert.expect(1);
+
+    return crank.call($elements, function () {
+    }, "test").then(function (result) {
+      assert.deepEqual(result, [[], []]);
     });
   });
 

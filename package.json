@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-crank#readme",
   "dependencies": {
-    "mu-jquery-wire": "^5.0.8"
+    "mu-jquery-wire": "^6.0.0"
   },
   "peerDependencies": {
     "jquery": "^3.0.0",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "qunitjs": "^2.3.2",
     "jquery": "^3.2.1",
-    "mu-jquery-capture": "^3.0.0",
+    "mu-jquery-capture": "^3.0.1",
     "standard-version": "^4.0.0"
   }
 }
