@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.2"></a>
+## [6.0.2](https://github.com/mu-lib/mu-jquery-crank/compare/v6.0.1...v6.0.2) (2017-10-24)
+
+
+### Bug Fixes
+
+* bump deps ([1657113](https://github.com/mu-lib/mu-jquery-crank/commit/1657113))
+* use element jquery vs global jquery ([#3](https://github.com/mu-lib/mu-jquery-crank/issues/3)) ([2cca0c9](https://github.com/mu-lib/mu-jquery-crank/commit/2cca0c9))
+
+
+
 <a name="6.0.1"></a>
 ## [6.0.1](https://github.com/mu-lib/mu-jquery-crank/compare/v6.0.0...v6.0.1) (2017-06-16)
 
