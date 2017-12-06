@@ -1,4 +1,4 @@
-# µ jQuery crank module
+# A jQuery plugin for cranking events
 
 - [tests](tests)
 - [changelog](CHANGELOG.md)
